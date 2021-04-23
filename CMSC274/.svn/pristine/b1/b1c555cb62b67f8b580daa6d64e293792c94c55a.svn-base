@@ -1,0 +1,163 @@
+package edu.ben.assignments.assignment2redo.test;
+
+import static org.junit.Assert.*;
+
+import javax.swing.JButton;
+
+import org.junit.Test;
+
+import edu.ben.assignments.assignment2.TicTacToeButtonListener;
+
+/**
+ * This is my tictactoebuttonlistenertest class
+ * 
+ * @author omerb
+ * @version 1.0
+ */
+public class TicTacToeButtonListenerTest {
+
+	@Test
+	/**
+	 * Tests the empty board
+	 */
+	public void testEmpty() {
+		// test the empty of the grid
+		TicTacToeButtonListener empty = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean check = empty.isEmpty();
+		// checks if the grid is empty
+		assertTrue(check);
+	}
+	
+	@Test
+	/**
+	 * Tests the not empty board
+	 */
+	public void testNotEmpty() {
+		// test the empty of the grid
+		TicTacToeButtonListener empty = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean check = empty.isEmpty();
+		// checks if the grid is empty
+		assertFalse(check);
+	}
+	
+	@Test
+	/**
+	 * Tests the full board
+	 */
+	public void testFull() {
+		// test the full of the grid
+		TicTacToeButtonListener fill = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean full = fill.isFull();
+		// checks if the grid is full
+		assertTrue(full);
+	}
+	
+	@Test
+	/**
+	 * Tests the not so full board
+	 */
+	public void testNotFull() {
+		// test the full of the grid
+		TicTacToeButtonListener fill = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean full = fill.isFull();
+		// checks if the grid is not full
+		assertFalse(full);
+	}
+	
+	@Test
+	/**
+	 * Tests the winner
+	 */
+	public void testWinner() {
+		// test the winner
+		TicTacToeButtonListener win = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean winner = win.checkIfWon(null);
+		// checks if there is a winner
+		assertTrue(winner);
+	}
+	
+	@Test
+	/**
+	 * Tests the no winner
+	 */
+	public void testNotWinner() {
+		// test the not winner
+		TicTacToeButtonListener win = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean winner = win.checkIfWon(null);
+		// checks if there is no winner
+		assertFalse(winner);
+	}
+	
+	@Test
+	/**
+	 * Tests the vertical match
+	 */
+	public void testVertical() {
+		// test if there is a vertical match
+		TicTacToeButtonListener verticalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean vertical = verticalMatch.checkVertically(null);
+		// checks if there is a vertical match
+		assertTrue(vertical);
+	}
+	
+	@Test
+	/**
+	 * Tests the failed vertical match
+	 */
+	public void testNoVertical() {
+		// test if there is not a vertical match
+		TicTacToeButtonListener verticalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean vertical = verticalMatch.checkVertically(null);
+		// checks if there is not a vertical match
+		assertFalse(vertical);
+	}
+	
+	@Test
+	/**
+	 * Tests the horizontal match
+	 */
+	public void testHorizontal() {
+		// test if there is a horizontal match
+		TicTacToeButtonListener horizontalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean horizontal = horizontalMatch.checkHorizontal(null);
+		// checks if there is a horizontal match
+		assertTrue(horizontal);
+	}
+	
+	@Test
+	/**
+	 * Tests the failed horizontal match
+	 */
+	public void testNoHorizontal() {
+		// test if there is not a horizontal match
+		TicTacToeButtonListener horizontalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean horizontal = horizontalMatch.checkHorizontal(null);
+		// checks if there is not a horizontal match
+		assertFalse(horizontal);
+	}
+	
+	@Test
+	/**
+	 * Tests the diagonal match
+	 */
+	public void testDiagonal() {
+		// test if there is a diagonal match
+		TicTacToeButtonListener diagonalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean diagonal = diagonalMatch.checkDiagonally(null);
+		// checks if there is a diagonal match
+		assertTrue(diagonal);
+	}
+	
+	@Test
+	/**
+	 * Tests the failed diagonal match
+	 */
+	public void testNoDiagonal() {
+		// test if there is not a diagonal match
+		TicTacToeButtonListener diagonalMatch = new TicTacToeButtonListener(null, 0, 0, null);
+		boolean diagonal = diagonalMatch.checkDiagonally(null);
+		// checks if there is not a diagonal match
+		assertFalse(diagonal);
+	}
+
+}

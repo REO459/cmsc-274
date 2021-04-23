@@ -1,0 +1,65 @@
+package edu.ben.exams.exam1;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class Q1Test {
+	
+	@Test
+	public void testFirstPdf() {
+		try {
+			double expected = 9.630366901015991E-4;
+			double actual = Q1.pdf(10,2,2);
+			assertEquals(expected, actual, 1e-8);
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+
+	@Test
+	public void testSecondPdf() {
+		double val = 10;
+		try {
+			double expected = Math.exp(-val*val/3)/ Math.sqrt(2 * Math.PI);
+			double actual = Q1.pdf(10);
+			assertEquals(expected, actual, 1e-8);
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+	
+	@Test
+	public void testCdfPositive() {
+		try {
+			double expected = 1.0;
+			double actual = Q1.cdf(10);
+			assertEquals(expected, actual, 1e-8);
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+	
+	@Test
+	public void testCdfNegative() {
+		try {
+			double expected = 0.0;
+			double actual = Q1.cdf(-10);
+			assertEquals(expected, actual, 1e-8);
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+	
+	@Test
+	public void testCdf() {
+		try {
+			double expected = 1.4295558140933835;
+			double actual = Q1.cdf(2.0);
+			assertEquals(expected, actual, 1e-8);
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+
+}

@@ -1,0 +1,30 @@
+package edu.ben.assignments.assignment2.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import edu.ben.assignments.assignment2.TicTacToeButtonListener;
+
+/**
+ * This is my tictactoebuttonlistenertest class
+ * 
+ * @author omerb
+ * @version 1.0
+ */
+public class TicTacToeButtonListenerTest {
+
+	@Test
+	/**
+	 * Tests the vertical match
+	 */
+	public void testEmpty() {
+		// test the empty of the grid
+		TicTacToeButtonListener empty = new TicTacToeButtonListener(null, 0, 0, null);
+		empty.isEmpty();
+		boolean expected = true;
+		// checks if the grid is empty
+		assertEquals(expected, empty);
+	}
+
+}

@@ -1,0 +1,91 @@
+package edu.ben.assignments.assignment4.test;
+
+import java.io.File;
+
+import org.junit.Test;
+
+import edu.ben.assignments.assignment4.Assignment4;
+
+import student.TestCase;
+
+/**
+ * This is my assignment4 test
+ * 
+ * @author omerb
+ * @version 1.0
+ */
+public class Assignment4Test extends TestCase {
+
+	@Test
+	/**
+	 * To test the actual output
+	 */
+	public void testOutput() {
+		// creates files
+		File f1 = new File("Actions.txt");
+		File f2 = new File("Cards.txt");
+		// call the method
+		Assignment4.compute(f1, f2);
+		// check if the output is correct
+		try {
+			assertEquals("Winner = Player\nWinner = Dealer\nDraw\n", systemOut().getHistory());
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+
+	@Test
+	/**
+	 * To test no cards output
+	 */
+	public void testNoCards() {
+		// creates files
+		File f1 = new File("Actions.txt");
+		File f2 = new File("null.txt");
+		// call the method
+		Assignment4.compute(f1, f2);
+		// check if the output is correct
+		try {
+			assertEquals("Draw\nNot enough cards\n", systemOut().getHistory());
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+	
+	@Test
+	/**
+	 * To test out too many cards output
+	 */
+	public void testTooManyCards() {
+		// creates files
+		File f1 = new File("Actions.txt");
+		File f2 = new File("lotsofcards.txt");
+		// call the method
+		Assignment4.compute(f1, f2);
+		//check if the output is correct
+		try {
+			assertEquals("Draw\nToo many cards\n", systemOut().getHistory());
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+	
+	@Test
+	/**
+	 * To test out too many cards output
+	 */
+	public void testNotFormatted() {
+		// creates files
+		File f1 = new File("Actions.txt");
+		File f2 = new File("number.txt");
+		// call the method
+		Assignment4.compute(f1, f2);
+		//check if the output is correct
+		try {
+			assertEquals("Draw\nNot a formatted number\n", systemOut().getHistory());
+		} catch (Exception e) {
+			fail("Should not have thrown exception");
+		}
+	}
+
+}

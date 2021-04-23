@@ -1,0 +1,198 @@
+package edu.ben.assignments.assignment4;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+/**
+ * This is my assignment4 class
+ * 
+ * @author omerb
+ * @version 1.0
+ */
+public class Assignment4 {
+
+	// the variables for the sums
+	/**
+	 * the player sum
+	 */
+	private static double playerSum = 0;
+	/**
+	 * the dealer sum
+	 */
+	private static double dealerSum = 0;
+
+	/**
+	 * This is my constructor
+	 */
+	private Assignment4() {
+
+	}
+
+	/**
+	 * Prints out the system
+	 * 
+	 * The grasp I use is creator because I created the files to use to help compute
+	 * 
+	 * @param args the system out prints
+	 * @throws FileNotFoundException if there is no file
+	 */
+	public static void main(String[] args) throws FileNotFoundException {
+		// creates the file
+		File f1 = new File("Actions.txt");
+		File f2 = new File("Cards.txt");
+		// calls the method
+		compute(f1, f2);
+	}
+
+	/**
+	 * Computes for the seven and a half
+	 * 
+	 * The grasp I use is low coupling that I used a lot of commands in 1 method
+	 * rather than creating a lot of different methods to do.
+	 * 
+	 * Also low cohesion is used by basically putting a complex task in one function
+	 * area
+	 * 
+	 * @param f1 for the actions in the file
+	 * @param f2 for the cards in the file
+	 */
+	public static void compute(File f1, File f2) {
+
+		// shows which turn it is
+		boolean playerTurn = true;
+		boolean dealerTurn = false;
+
+		// creates the scanners
+		Scanner cards;
+		Scanner scan;
+		// scanner becomes a string
+		String action = null;
+		try {
+			// seven and a half is the max
+			double sevenHalf = 7.5;
+			scan = new Scanner(f1);
+			// takes away the commas
+			while (scan.hasNext()) {
+				action = scan.nextLine();
+				action = action.replaceAll(",", "");
+			}
+			cards = new Scanner(f2);
+			// makes each word into an array
+			String[] words = action.split(" ");
+			// starts the loop of the card drawing
+			for (int i = 0; i < words.length; i++) {
+				// it's the player's turn
+
+				// The grasp that is used is information expert
+				// it is responsible for knowing what turn the
+				// player is
+				if (words[i].equals("Player") && playerTurn) {
+					if (words[i].equals("Hit")) {
+						while (cards.hasNext()) {
+							// adds up for the player
+							playerSum += cards.nextDouble();
+
+						}
+					}
+					// changes turns
+					if (words[i].equals("Stay")) {
+						playerTurn = false;
+						dealerTurn = true;
+						if (playerSum > sevenHalf) {
+							System.out.println("Winner = Dealer");
+						}
+					}
+				}
+				// the dealers's turn for the game
+				if (words[i].equals("Dealer") && dealerTurn) {
+					if (words[i].equals("Hit")) {
+						while (cards.hasNext()) {
+							// adds up for the dealer
+							dealerSum += cards.nextDouble();
+						}
+					}
+					// changes turns
+					if (words[i].equals("Stay")) {
+						playerTurn = true;
+						dealerTurn = false;
+						// check if the dealer sum is over seven half
+						if (dealerSum > sevenHalf) {
+							System.out.println("Winner = Player");
+						}
+					}
+				}
+			}
+			// The grasp that is used is information expert
+			// which know which player wins depending on the
+			// sum of numbers
+
+			// if the player wins
+			if (playerSum > dealerSum) {
+				System.out.println("Winner = Player");
+			}
+			// if the dealer wins
+			if (playerSum < dealerSum) {
+				System.out.println("Winner = Dealer");
+			}
+			// if it's a tie
+			if (playerSum == dealerSum) {
+				System.out.println("Draw");
+			}
+
+			// checks if it reaches over 40 cards
+
+			// The grasp that is used is information expert
+			// checking how many cards are in the text file
+			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader(f2));
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			// counts each card
+			int lines = 0;
+			try {
+				while (reader.readLine() != null) {
+					lines++;
+				}
+				// checks if there are over 40 cards
+				if (lines > 40) {
+					System.out.println("Too many cards");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			// checks if there isn't enough cards
+			BufferedReader cardReader = null;
+			try {
+				cardReader = new BufferedReader(new FileReader(f2));
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			// print out enough cards if the line is null
+			try {
+				if (cardReader.readLine() == null) {
+					System.out.println("Not enough cards");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			// The grasp used is information expert
+			// check if there is not file or format of the
+			// number
+
+			// catch exception if the file is not found
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			// checks if the number is not a format
+		} catch (NumberFormatException e2) {
+			System.out.println("Not a formatted number");
+		}
+	}
+}
